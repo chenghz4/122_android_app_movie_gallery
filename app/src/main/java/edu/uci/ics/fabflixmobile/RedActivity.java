@@ -102,7 +102,7 @@ public class RedActivity extends ActionBarActivity {
         );
 
 
-        final StringRequest loginRequest = new StringRequest(Request.Method.POST, "https://10.0.2.2:8443/project4-login-example/api/login",
+        final StringRequest loginRequest = new StringRequest(Request.Method.POST, "https://10.0.2.2:8443/project4-login-example/api/android-login",
             new Response.Listener<String>()
             {
                 @Override
@@ -130,7 +130,7 @@ public class RedActivity extends ActionBarActivity {
             }  // HTTP POST Form Data
         };
 
-        SafetyNet.getClient(this).verifyWithRecaptcha("YOUR_SITE_KEY")
+        SafetyNet.getClient(this).verifyWithRecaptcha("your-site-key")
             .addOnSuccessListener(this, new OnSuccessListener<SafetyNetApi.RecaptchaTokenResponse>() {
                 @Override
                 public void onSuccess(SafetyNetApi.RecaptchaTokenResponse response) {
