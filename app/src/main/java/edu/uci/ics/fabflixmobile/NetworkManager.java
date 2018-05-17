@@ -8,20 +8,18 @@ import com.android.volley.toolbox.Volley;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 
-public class NetworkManager {
-    private static Context context;
+class NetworkManager {
     private static NetworkManager instance = null;
-
     RequestQueue queue;
+
     private NetworkManager() {
         NukeSSLCerts.nuke();  // disable ssl cert self-sign check
     }
 
-    public static NetworkManager sharedManager(Context ctx) {
+    static NetworkManager sharedManager(Context ctx) {
         if (instance == null) {
-            context = ctx;
             instance = new NetworkManager();
-            instance.queue = Volley.newRequestQueue(context.getApplicationContext());
+            instance.queue = Volley.newRequestQueue(ctx.getApplicationContext());
 
             // Create a new cookie store, which handles sessions information with the server.
             // This cookie store will be shared across all the network requests.

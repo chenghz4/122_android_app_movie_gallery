@@ -19,14 +19,14 @@ public class GreenActivity extends ActionBarActivity {
         Toast.makeText(this, "Last activity was " + bundle.get("last_activity") + ".", Toast.LENGTH_LONG).show();
 
         String msg = bundle.getString("message");
-        if(msg != null && !"".equals(msg)){
-            ((TextView)findViewById(R.id.last_page_msg_container)).setText(msg);
+        if (msg != null && !"".equals(msg)) {
+            ((TextView) findViewById(R.id.last_page_msg_container)).setText(msg);
         }
     }
 
 
-    public void goToRed(View view){
-        String msg = ((EditText)findViewById(R.id.green_2_red_message)).getText().toString();
+    public void goToRed(View view) {
+        String msg = ((EditText) findViewById(R.id.green_2_red_message)).getText().toString();
 
         Intent goToIntent = new Intent(this, RedActivity.class);
 
@@ -35,8 +35,9 @@ public class GreenActivity extends ActionBarActivity {
 
         startActivity(goToIntent);
     }
-    public void goToBlue(View view){
-        String msg = ((EditText)findViewById(R.id.green_2_blue_message)).getText().toString();
+
+    public void goToBlue(View view) {
+        String msg = ((EditText) findViewById(R.id.green_2_blue_message)).getText().toString();
 
         Intent goToIntent = new Intent(this, BlueActivity.class);
 

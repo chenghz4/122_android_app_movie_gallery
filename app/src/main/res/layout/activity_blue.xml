@@ -21,7 +21,9 @@
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:text="The blue page" />
-        <View android:layout_width="fill_parent"
+
+        <View
+            android:layout_width="fill_parent"
             android:layout_height="2dip"
             android:layout_marginBottom="20dip"
             android:background="#FFFFFF" />
@@ -33,8 +35,8 @@
             android:text="No message from last page."
             android:id="@+id/last_page_msg_container"/>
 
-
-        <View android:layout_width="fill_parent"
+        <View
+            android:layout_width="fill_parent"
             android:layout_height="2dip"
             android:layout_marginBottom="20dip"
             android:background="#FFFFFF" />
@@ -57,11 +59,12 @@
             android:layout_gravity="end"
             android:text="Go to the Red Page"
             android:onClick="goToRed"/>
-        <View android:layout_width="fill_parent"
+
+        <View
+            android:layout_width="fill_parent"
             android:layout_height="2dip"
             android:layout_marginBottom="10dip"
             android:background="#FFFFFF" />
-
 
         <TextView
             android:text="Message for the green page:"
@@ -81,11 +84,12 @@
             android:layout_gravity="end"
             android:text="Go to the Green Page"
             android:onClick="goToGreen"/>
-        <View android:layout_width="fill_parent"
+
+        <View
+            android:layout_width="fill_parent"
             android:layout_height="2dip"
             android:layout_marginBottom="10dip"
             android:background="#FFFFFF" />
-
 
     </LinearLayout>
 </RelativeLayout>

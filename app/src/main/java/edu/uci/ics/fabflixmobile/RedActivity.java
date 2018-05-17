@@ -68,7 +68,7 @@ public class RedActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void connectToTomcat(View view){
+    public void connectToTomcat(View view) {
 
         // Post request form data
         final Map<String, String> params = new HashMap<String, String>();
@@ -82,83 +82,77 @@ public class RedActivity extends ActionBarActivity {
 
         // 10.0.2.2 is the host machine when running the android emulator
         final StringRequest afterLoginRequest = new StringRequest(Request.Method.GET, "https://10.0.2.2:8443/project4-login-example/api/username",
-            new Response.Listener<String>()
-            {
-                @Override
-                public void onResponse(String response) {
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
 
-                    Log.d("response2", response);
-                    ((TextView)findViewById(R.id.http_response)).setText(response);
+                        Log.d("response2", response);
+                        ((TextView) findViewById(R.id.http_response)).setText(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("security.error", error.toString());
+                    }
                 }
-            },
-            new Response.ErrorListener()
-            {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    // error
-                    Log.d("security.error", error.toString());
-                }
-            }
         );
 
 
         final StringRequest loginRequest = new StringRequest(Request.Method.POST, "https://10.0.2.2:8443/project4-login-example/api/android-login",
-            new Response.Listener<String>()
-            {
-                @Override
-                public void onResponse(String response) {
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
 
-                    Log.d("response", response);
-                    ((TextView)findViewById(R.id.http_response)).setText(response);
-                    // Add the request to the RequestQueue.
-                    queue.add(afterLoginRequest);
+                        Log.d("response", response);
+                        ((TextView) findViewById(R.id.http_response)).setText(response);
+                        // Add the request to the RequestQueue.
+                        queue.add(afterLoginRequest);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("security.error", error.toString());
+                    }
                 }
-            },
-            new Response.ErrorListener()
-            {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    // error
-                    Log.d("security.error", error.toString());
-                }
-            }
         ) {
             @Override
-            protected Map<String, String> getParams()
-            {
+            protected Map<String, String> getParams() {
                 return params;
             }  // HTTP POST Form Data
         };
 
         SafetyNet.getClient(this).verifyWithRecaptcha("your-site-key")
-            .addOnSuccessListener(this, new OnSuccessListener<SafetyNetApi.RecaptchaTokenResponse>() {
-                @Override
-                public void onSuccess(SafetyNetApi.RecaptchaTokenResponse response) {
-                    if (!response.getTokenResult().isEmpty()) {
-                        // Add the request to the RequestQueue.
-                        params.put("g-recaptcha-response", response.getTokenResult());
-                        queue.add(loginRequest);
+                .addOnSuccessListener(this, new OnSuccessListener<SafetyNetApi.RecaptchaTokenResponse>() {
+                    @Override
+                    public void onSuccess(SafetyNetApi.RecaptchaTokenResponse response) {
+                        if (!response.getTokenResult().isEmpty()) {
+                            // Add the request to the RequestQueue.
+                            params.put("g-recaptcha-response", response.getTokenResult());
+                            queue.add(loginRequest);
+                        }
                     }
-                }
-            })
-            .addOnFailureListener(this, new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    if (e instanceof ApiException) {
-                        ApiException apiException = (ApiException) e;
-                        Log.d("Login", "Error message: " +
-                                CommonStatusCodes.getStatusCodeString(apiException.getStatusCode()));
-                    } else {
-                        Log.d("Login", "Unknown type of error: " + e.getMessage());
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        if (e instanceof ApiException) {
+                            ApiException apiException = (ApiException) e;
+                            Log.d("Login", "Error message: " +
+                                    CommonStatusCodes.getStatusCodeString(apiException.getStatusCode()));
+                        } else {
+                            Log.d("Login", "Unknown type of error: " + e.getMessage());
+                        }
                     }
-                }
-            });
+                });
 
-        return ;
     }
 
-    public void goToBlue(View view){
-        String msg = ((EditText)findViewById(R.id.red_2_blue_message)).getText().toString();
+    public void goToBlue(View view) {
+        String msg = ((EditText) findViewById(R.id.red_2_blue_message)).getText().toString();
 
         Intent goToIntent = new Intent(this, BlueActivity.class);
 
@@ -167,8 +161,9 @@ public class RedActivity extends ActionBarActivity {
 
         startActivity(goToIntent);
     }
-    public void goToGreen(View view){
-        String msg = ((EditText)findViewById(R.id.red_2_green_message)).getText().toString();
+
+    public void goToGreen(View view) {
+        String msg = ((EditText) findViewById(R.id.red_2_green_message)).getText().toString();
 
         Intent goToIntent = new Intent(this, GreenActivity.class);
 
