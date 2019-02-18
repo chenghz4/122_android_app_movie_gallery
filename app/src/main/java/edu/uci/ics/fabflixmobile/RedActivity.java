@@ -70,11 +70,6 @@ public class RedActivity extends ActionBarActivity {
 
     public void connectToTomcat(View view) {
 
-        // Post request form data
-        final Map<String, String> params = new HashMap<String, String>();
-        params.put("username", "anteater");
-        params.put("password", "123456");
-
         // no user is logged in, so we must connect to the server
 
         // Use the same network queue across our application
@@ -86,7 +81,7 @@ public class RedActivity extends ActionBarActivity {
                     @Override
                     public void onResponse(String response) {
 
-                        Log.d("response2", response);
+                        Log.d("username.reponse", response);
                         ((TextView) findViewById(R.id.http_response)).setText(response);
                     }
                 },
@@ -94,18 +89,18 @@ public class RedActivity extends ActionBarActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // error
-                        Log.d("security.error", error.toString());
+                        Log.d("username.error", error.toString());
                     }
                 }
         );
 
 
-        final StringRequest loginRequest = new StringRequest(Request.Method.POST, "https://10.0.2.2:8443/project4-login-example/api/android-login",
+        final StringRequest loginRequest = new StringRequest(Request.Method.POST, "https://10.0.2.2:8443/project4-login-example/api/login",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
-                        Log.d("response", response);
+                        Log.d("login.success", response);
                         ((TextView) findViewById(R.id.http_response)).setText(response);
                         // Add the request to the RequestQueue.
                         queue.add(afterLoginRequest);
@@ -115,39 +110,25 @@ public class RedActivity extends ActionBarActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // error
-                        Log.d("security.error", error.toString());
+                        Log.d("login.error", error.toString());
                     }
                 }
         ) {
             @Override
             protected Map<String, String> getParams() {
+                // Post request form data
+                final Map<String, String> params = new HashMap<String, String>();
+                params.put("username", "anteater");
+                params.put("password", "123456");
+                // add special parameter for android to let login servlet skip reCaptcha
+                params.put("androidLogin", "true");
+
                 return params;
-            }  // HTTP POST Form Data
+            }
         };
 
-        SafetyNet.getClient(this).verifyWithRecaptcha("your-site-key")
-                .addOnSuccessListener(this, new OnSuccessListener<SafetyNetApi.RecaptchaTokenResponse>() {
-                    @Override
-                    public void onSuccess(SafetyNetApi.RecaptchaTokenResponse response) {
-                        if (!response.getTokenResult().isEmpty()) {
-                            // Add the request to the RequestQueue.
-                            params.put("g-recaptcha-response", response.getTokenResult());
-                            queue.add(loginRequest);
-                        }
-                    }
-                })
-                .addOnFailureListener(this, new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        if (e instanceof ApiException) {
-                            ApiException apiException = (ApiException) e;
-                            Log.d("Login", "Error message: " +
-                                    CommonStatusCodes.getStatusCodeString(apiException.getStatusCode()));
-                        } else {
-                            Log.d("Login", "Unknown type of error: " + e.getMessage());
-                        }
-                    }
-                });
+        // !important: queue.add is where the login request is actually sent
+        queue.add(loginRequest);
 
     }
 

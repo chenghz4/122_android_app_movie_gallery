@@ -10,6 +10,11 @@ android {
     compileSdkVersion 21
     buildToolsVersion '27.0.3'
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     defaultConfig {
         applicationId "edu.uci.ics.fabflixmobile"
         minSdkVersion 14
