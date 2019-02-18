@@ -120,8 +120,6 @@ public class RedActivity extends ActionBarActivity {
                 final Map<String, String> params = new HashMap<String, String>();
                 params.put("username", "anteater");
                 params.put("password", "123456");
-                // add special parameter for android to let login servlet skip reCaptcha
-                params.put("androidLogin", "true");
 
                 return params;
             }
