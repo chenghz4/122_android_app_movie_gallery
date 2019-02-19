@@ -76,7 +76,7 @@ public class RedActivity extends ActionBarActivity {
         final RequestQueue queue = NetworkManager.sharedManager(this).queue;
 
         // 10.0.2.2 is the host machine when running the android emulator
-        final StringRequest afterLoginRequest = new StringRequest(Request.Method.GET, "https://10.0.2.2:8443/project4-login-example/api/username",
+        final StringRequest afterLoginRequest = new StringRequest(Request.Method.GET, "https://10.0.2.2:8443/2019w-project4-login-example/api/username",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -95,7 +95,7 @@ public class RedActivity extends ActionBarActivity {
         );
 
 
-        final StringRequest loginRequest = new StringRequest(Request.Method.POST, "https://10.0.2.2:8443/project4-login-example/api/login",
+        final StringRequest loginRequest = new StringRequest(Request.Method.POST, "https://10.0.2.2:8443/2019w-project4-login-example/api/login",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
