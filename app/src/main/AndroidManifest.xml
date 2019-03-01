@@ -24,6 +24,8 @@
         <activity
             android:name=".GreenActivity"
             android:label="@string/title_activity_green" />
+        <activity
+            android:name=".ListViewActivity" />
     </application>
 
 </manifest>

@@ -13,8 +13,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,41 +32,14 @@ public class BlueActivity extends ActionBarActivity {
 
     }
 
-    public void connectToTomcat(View view) {
-        final RequestQueue queue = NetworkManager.sharedManager(this).queue;
-        Intent goToIntent = new Intent(this, GreenActivity.class);
-        String title=((EditText) findViewById(R.id.blue_2_red_message)).getText().toString();
-        String page="1";
+    public void gotoserach(View view) {
 
-
-        final StringRequest SearchRequest = new StringRequest(Request.Method.GET,
-                "https://10.0.2.2:8443/api/stars" +
-                        "?id="+title+"&year=&director=&star=&page="+page+"&number=20" +
-                        "&sort=a.rating%20desc&genres=&letters=",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        Log.d("result.success", response);
-                        ((TextView) findViewById(R.id.http_response3)).setText(response);
-
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // error
-                        Log.d("result.error", error.toString());
-                    }
-                }
-        );
-
-        // !important: queue.add is where the login request is actually sent
-        queue.add(SearchRequest);
+        Intent goToIntent = new Intent(this, ListViewActivity.class);
+        String title = ((EditText) findViewById(R.id.blue_2_red_message)).getText().toString();
+        goToIntent.putExtra("message", title);
+        startActivity(goToIntent);
 
     }
-
 
 
 }
