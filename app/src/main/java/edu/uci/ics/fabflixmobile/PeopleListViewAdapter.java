@@ -28,10 +28,19 @@ public class PeopleListViewAdapter extends ArrayAdapter<Movie> {
         Movie person = people.get(position);
 
         TextView titleView = (TextView)view.findViewById(R.id.title);
-        TextView subtitleView = (TextView)view.findViewById(R.id.subtitle);
+        TextView yearView = (TextView)view.findViewById(R.id.year);
+        TextView directorView = (TextView)view.findViewById(R.id.year);
+        TextView list_sView = (TextView)view.findViewById(R.id.year);
+        TextView list_gView = (TextView)view.findViewById(R.id.year);
+
+
 
         titleView.setText(person.getName());
-        subtitleView.setText(person.getBirthYear().toString());
+        yearView.setText(person.getBirthYear().toString());
+        directorView.setText(person.getDirectname());
+        list_sView.setText(person.getStarlist());
+        list_gView.setText(person.getGenreslist());
+
 
         return view;
     }
