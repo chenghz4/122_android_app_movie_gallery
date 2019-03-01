@@ -8,4 +8,10 @@
 
     <string name="title_activity_blue"> The Blue Page </string>
     <string name="title_activity_green"> The Green Page </string>
+    <string name="the_green_page">The green page</string>
+    <string name="no_message_from_last_page">No message from last page.</string>
+    <string name="go_to_the_red_page">Go to the Red Page</string>
+    <string name="message_for_the_blue_page">Message for the blue page:</string>
+    <string name="go_to_the_blue_page">Go to the Blue Page</string>
+    <string name="message_for_the_red_page">Message for the red page:</string>
 </resources>

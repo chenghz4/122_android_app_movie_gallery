@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25sp"
-            android:text="The green page" />
+            android:text="@string/the_green_page" />
 
         <View
             android:layout_width="fill_parent"
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
-            android:text="No message from last page."
+            android:text="@string/no_message_from_last_page"
             android:id="@+id/last_page_msg_container"/>
 
         <View
@@ -42,7 +42,7 @@
             android:background="#FFFFFF" />
 
         <TextView
-            android:text="Message for the blue page:"
+            android:text="@string/message_for_the_blue_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp" />
@@ -51,13 +51,14 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="20dp"
-            android:id="@+id/green_2_blue_message"/>
+            android:id="@+id/green_2_blue_message"
+            android:inputType="" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:text="Go to the Blue Page"
+            android:text="@string/go_to_the_blue_page"
             android:onClick="goToBlue"/>
 
         <View
@@ -67,7 +68,7 @@
             android:background="#FFFFFF" />
 
         <TextView
-            android:text="Message for the red page:"
+            android:text="@string/message_for_the_red_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp" />
@@ -82,7 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:text="Go to the Red Page"
+            android:text="@string/go_to_the_red_page"
             android:onClick="goToRed"/>
 
         <View
