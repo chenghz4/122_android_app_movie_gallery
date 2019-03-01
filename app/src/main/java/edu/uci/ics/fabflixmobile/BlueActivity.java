@@ -31,17 +31,18 @@ public class BlueActivity extends ActionBarActivity {
         final RequestQueue queue = NetworkManager.sharedManager(this).queue;
         Intent goToIntent = new Intent(this, GreenActivity.class);
         String title=((EditText) findViewById(R.id.blue_2_red_message)).getText().toString();
+        String page="1";
 
 
         final StringRequest SearchRequest = new StringRequest(Request.Method.GET,
                 "https://10.0.2.2:8443/api/stars" +
-                        "?id="+title+"&year=&director=&star=&page=1&number=20" +
+                        "?id="+title+"&year=&director=&star=&page="+page+"&number=20" +
                         "&sort=a.rating%20desc&genres=&letters=",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
-                        Log.d("login1.success", response);
+                        Log.d("result.success", response);
                         ((TextView) findViewById(R.id.http_response3)).setText(response);
 
 
@@ -51,21 +52,10 @@ public class BlueActivity extends ActionBarActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // error
-                        Log.d("login1.error", error.toString());
+                        Log.d("result.error", error.toString());
                     }
                 }
-        ) {
-        /*    @Override
-            protected Map<String, String> getParams() {
-                // Post request form data
-                final Map<String, String> params = new HashMap<String, String>();
-                String title=((EditText) findViewById(R.id.blue_2_red_message)).getText().toString();
-                params.put("id", title);
-                params.put("page","1");
-                params.put("number","20");
-                return params;
-            }*/
-        };
+        );
 
         // !important: queue.add is where the login request is actually sent
         queue.add(SearchRequest);

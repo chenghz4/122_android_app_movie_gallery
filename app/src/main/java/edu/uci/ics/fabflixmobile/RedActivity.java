@@ -40,23 +40,6 @@ public class RedActivity extends ActionBarActivity {
     public void connectToTomcat(View view) {
         final RequestQueue queue = NetworkManager.sharedManager(this).queue;
         Intent goToIntent = new Intent(this, BlueActivity.class);
-       /* final StringRequest afterLoginRequest = new StringRequest(Request.Method.GET, "https://10.0.2.2:8443/api/login/username",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        Log.d("username.reponse", response);
-                        ((TextView) findViewById(R.id.http_response)).setText(response);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // error
-                        Log.d("username.error", error.toString());
-                    }
-                }
-        );*/
 
 
         final StringRequest loginRequest = new StringRequest(Request.Method.POST, "https://10.0.2.2:8443/api/login",
@@ -66,9 +49,6 @@ public class RedActivity extends ActionBarActivity {
 
                         Log.d("login.success", response);
                         ((TextView) findViewById(R.id.http_response)).setText(response);
-
-                        // Add the request to the RequestQueue.
-                       // queue.add(afterLoginRequest);
                         if(response.contains("success")){
 
 
@@ -92,8 +72,6 @@ public class RedActivity extends ActionBarActivity {
             protected Map<String, String> getParams() {
                 // Post request form data
                 final Map<String, String> params = new HashMap<String, String>();
-                 //params.put("username", "anteater");
-                 //params.put("password", "123456");
                 String user=((EditText) findViewById(R.id.red_2_blue_message)).getText().toString();
                 String password=((EditText) findViewById(R.id.red_2_green_message)).getText().toString();
                 params.put("username", user);
