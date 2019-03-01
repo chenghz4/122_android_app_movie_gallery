@@ -16,12 +16,6 @@
         android:orientation="vertical"
         android:layout_centerInParent="true">
 
-        <TextView
-            android:id="@+id/http_response3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp" />
-
         <View
             android:layout_width="fill_parent"
             android:layout_height="2dip"

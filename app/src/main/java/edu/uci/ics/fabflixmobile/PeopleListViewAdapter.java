@@ -29,9 +29,9 @@ public class PeopleListViewAdapter extends ArrayAdapter<Movie> {
 
         TextView titleView = (TextView)view.findViewById(R.id.title);
         TextView yearView = (TextView)view.findViewById(R.id.year);
-        TextView directorView = (TextView)view.findViewById(R.id.year);
-        TextView list_sView = (TextView)view.findViewById(R.id.year);
-        TextView list_gView = (TextView)view.findViewById(R.id.year);
+        TextView directorView = (TextView)view.findViewById(R.id.director);
+        TextView list_sView = (TextView)view.findViewById(R.id.list_s);
+        TextView list_gView = (TextView)view.findViewById(R.id.list_g);
 
 
 
