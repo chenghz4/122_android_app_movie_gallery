@@ -21,16 +21,20 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class ListViewActivity extends Activity {
+
+    final RequestQueue queue = NetworkManager.sharedManager(this).queue;
+    PeopleListViewAdapter adapter;
+    String page="1";
+    ArrayList<Movie> people = new ArrayList<>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview);
-        final RequestQueue queue = NetworkManager.sharedManager(this).queue;
-        ArrayList<Movie> people = new ArrayList<>();
+
         Bundle bundle = getIntent().getExtras();
         String title=bundle.getString("message");
-        String page="1";
-
 
         final JsonArrayRequest SearchRequest = new JsonArrayRequest("https://10.0.2.2:8443/api/stars" +
                 "?id="+title+"&year=&director=&star=&page="+page+"&number=20" +
@@ -68,21 +72,119 @@ public class ListViewActivity extends Activity {
 
         // !important: queue.add is where the login request is actually sent
         queue.add(SearchRequest);
-
-
-
-        PeopleListViewAdapter adapter = new PeopleListViewAdapter(people, this);
+        adapter = new PeopleListViewAdapter(people, this);
 
         ListView listView = (ListView)findViewById(R.id.list);
         listView.setAdapter(adapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Movie person = people.get(position);
                 String message = String.format("Clicked on position: %d, name: %s, %d", position, person.getName(), person.getBirthYear());
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
+
+
+
     }
+    public void Next(View view) {
+        Bundle bundle = getIntent().getExtras();
+        String title=bundle.getString("message");
+        int temp=Integer.parseInt(page)+1;
+        page=""+temp;
+        final JsonArrayRequest SearchRequest = new JsonArrayRequest("https://10.0.2.2:8443/api/stars" +
+                "?id="+title+"&year=&director=&star=&page="+page+"&number=20" +
+                "&sort=a.rating%20desc&genres=&letters=",
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        people.clear();
+                        try {
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject jsonObject = response.getJSONObject(i);
+                                String id=jsonObject.getString("movie_id");
+                                String title=jsonObject.getString("movie_title");
+                                String year=jsonObject.getString("movie_year");
+                                String director=jsonObject.getString("movie_director");
+                                String list_s=jsonObject.getString("list_s");
+                                String list_g=jsonObject.getString("list_g");
+                                Movie movie=new Movie(id,title,year,director,list_s,list_g);
+                                people.add(movie);
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("result.error", error.toString());
+                    }
+                }
+        );
+
+        // !important: queue.add is where the login request is actually sent
+        queue.add(SearchRequest);
+        adapter.notifyDataSetChanged();
+
+        //queue.add(SearchRequest);
+
+    }
+    public void Previous(View view) {
+        Bundle bundle = getIntent().getExtras();
+        String title=bundle.getString("message");
+        int temp=Integer.parseInt(page)-1;
+        if(temp==0) temp=1;
+        page=""+temp;
+        final JsonArrayRequest SearchRequest = new JsonArrayRequest("https://10.0.2.2:8443/api/stars" +
+                "?id="+title+"&year=&director=&star=&page="+page+"&number=20" +
+                "&sort=a.rating%20desc&genres=&letters=",
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        people.clear();
+                        try {
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject jsonObject = response.getJSONObject(i);
+                                String id=jsonObject.getString("movie_id");
+                                String title=jsonObject.getString("movie_title");
+                                String year=jsonObject.getString("movie_year");
+                                String director=jsonObject.getString("movie_director");
+                                String list_s=jsonObject.getString("list_s");
+                                String list_g=jsonObject.getString("list_g");
+                                Movie movie=new Movie(id,title,year,director,list_s,list_g);
+                                people.add(movie);
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("result.error", error.toString());
+                    }
+                }
+        );
+
+        // !important: queue.add is where the login request is actually sent
+        queue.add(SearchRequest);
+        adapter.notifyDataSetChanged();
+
+
+        //queue.add(SearchRequest);
+
+    }
+
+
+
 }

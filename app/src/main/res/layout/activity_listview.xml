@@ -13,4 +13,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <Button
+        android:id="@+id/button3"
+        style="@android:style/Widget.DeviceDefault.Button"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="550dp"
+        android:onClick="Previous"
+        android:text="Pre" />
+
+    <Button
+        style="@android:style/Widget.DeviceDefault.Button"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="550dp"
+        android:onClick="Next"
+        android:text="Next" />
+
 </RelativeLayout>
