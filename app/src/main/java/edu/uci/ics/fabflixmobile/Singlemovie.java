@@ -77,7 +77,7 @@ public class Singlemovie extends Activity {
 
     }
 
-    public void goToRed(View view) {
+    public void Goback(View view) {
         Intent goToIntent = new Intent(this, BlueActivity.class);
         startActivity(goToIntent);
     }
