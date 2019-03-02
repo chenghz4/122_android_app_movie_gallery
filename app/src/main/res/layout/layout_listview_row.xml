@@ -35,6 +35,7 @@
         android:padding="10px"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:textSize="25px"
         android:text="1965"
         android:textColor="@android:color/white"
         />
