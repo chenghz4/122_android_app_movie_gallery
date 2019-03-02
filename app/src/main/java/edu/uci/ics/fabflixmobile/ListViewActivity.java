@@ -101,7 +101,9 @@ public class ListViewActivity extends Activity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        adapter.clear();
                         people.clear();
+
                         try {
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject jsonObject = response.getJSONObject(i);
@@ -148,7 +150,10 @@ public class ListViewActivity extends Activity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+
+                        adapter.clear();
                         people.clear();
+
                         try {
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject jsonObject = response.getJSONObject(i);
@@ -179,6 +184,8 @@ public class ListViewActivity extends Activity {
         // !important: queue.add is where the login request is actually sent
         queue.add(SearchRequest);
         adapter.notifyDataSetChanged();
+
+
 
 
         //queue.add(SearchRequest);
