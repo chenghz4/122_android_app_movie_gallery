@@ -26,6 +26,7 @@ public class ListViewActivity extends Activity {
     PeopleListViewAdapter adapter;
     String page="1";
     ArrayList<Movie> people = new ArrayList<>();
+    int temp1;
 
 
     @Override
@@ -44,6 +45,7 @@ public class ListViewActivity extends Activity {
                     public void onResponse(JSONArray response) {
 
                         try {
+                            temp1=response.length();
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject jsonObject = response.getJSONObject(i);
                                 String id=jsonObject.getString("movie_id");
@@ -83,6 +85,7 @@ public class ListViewActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Movie movie = people.get(position);
                 goToIntent1.putExtra("id", movie.getId());
+                System.out.print(movie.getId());
                 startActivity(goToIntent1);
             }
         });
@@ -93,8 +96,11 @@ public class ListViewActivity extends Activity {
     public void Next(View view) {
         Bundle bundle = getIntent().getExtras();
         String title=bundle.getString("message");
-        int temp=Integer.parseInt(page)+1;
-        page=""+temp;
+        if(temp1>=20) {
+            int temp = Integer.parseInt(page) + 1;
+            page = "" + temp;
+        }
+
         final JsonArrayRequest SearchRequest = new JsonArrayRequest("https://10.0.2.2:8443/api/stars" +
                 "?id="+title+"&year=&director=&star=&page="+page+"&number=20" +
                 "&sort=a.rating%20desc&genres=&letters=",
@@ -105,6 +111,7 @@ public class ListViewActivity extends Activity {
                         people.clear();
 
                         try {
+                            temp1=response.length();
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject jsonObject = response.getJSONObject(i);
                                 String id=jsonObject.getString("movie_id");
@@ -155,6 +162,7 @@ public class ListViewActivity extends Activity {
                         people.clear();
 
                         try {
+                            temp1=response.length();
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject jsonObject = response.getJSONObject(i);
                                 String id=jsonObject.getString("movie_id");

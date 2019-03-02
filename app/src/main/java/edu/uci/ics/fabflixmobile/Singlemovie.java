@@ -22,10 +22,6 @@ import java.util.ArrayList;
 public class Singlemovie extends Activity {
 
     final RequestQueue queue = NetworkManager.sharedManager(this).queue;
-    PeopleListViewAdapter adapter;
-    String page = "1";
-    ArrayList<Movie> people = new ArrayList<>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +29,16 @@ public class Singlemovie extends Activity {
         setContentView(R.layout.activity_movie);
         Bundle bundle = getIntent().getExtras();
         String id = bundle.getString("id");
+        ArrayList<Movie> movies = new ArrayList<>();
 
-        final JsonArrayRequest SearchRequest = new JsonArrayRequest("https://10.0.2.2:8443/api/single-movie" +
-                "?id="+id ,
+        final JsonArrayRequest SearchRequest1 = new JsonArrayRequest(
+                "https://10.0.2.2:8443/api/single-movie?id="+id,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
 
                         try {
+                            System.out.print(response.length());
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject jsonObject = response.getJSONObject(i);
                                 String id = jsonObject.getString("movie_id");
@@ -50,7 +48,7 @@ public class Singlemovie extends Activity {
                                 String list_s = jsonObject.getString("list_s");
                                 String list_g = jsonObject.getString("list_g");
                                 Movie movie = new Movie(id, title, year, director, list_s, list_g);
-                                people.add(movie);
+                                movies.add(movie);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -68,8 +66,8 @@ public class Singlemovie extends Activity {
         );
 
         // !important: queue.add is where the login request is actually sent
-        queue.add(SearchRequest);
-        adapter = new PeopleListViewAdapter(people, this);
+        queue.add(SearchRequest1);
+        PeopleListViewAdapter1 adapter = new PeopleListViewAdapter1(movies, this);
 
         ListView listView = (ListView) findViewById(R.id.list1);
         listView.setAdapter(adapter);
