@@ -32,7 +32,7 @@ public class ListViewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview);
-
+        Intent goToIntent1 = new Intent(this, Singlemovie.class);
         Bundle bundle = getIntent().getExtras();
         String title=bundle.getString("message");
 
@@ -78,14 +78,14 @@ public class ListViewActivity extends Activity {
         listView.setAdapter(adapter);
 
 
-        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Movie person = people.get(position);
-                String message = String.format("Clicked on position: %d, name: %s, %d", position, person.getName(), person.getBirthYear());
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                Movie movie = people.get(position);
+                goToIntent1.putExtra("id", movie.getId());
+                startActivity(goToIntent1);
             }
-        });*/
+        });
 
 
 
