@@ -212,6 +212,10 @@ public class ListViewActivity extends Activity {
         //queue.add(SearchRequest);
 
     }
+    public void Goback(View view) {
+        Intent goToIntent = new Intent(this, BlueActivity.class);
+        startActivity(goToIntent);
+    }
 
 
 

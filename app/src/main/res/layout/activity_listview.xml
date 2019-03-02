@@ -31,5 +31,13 @@
         android:layout_marginTop="550dp"
         android:onClick="Next"
         android:text="Next" />
+    <Button
+        style="@android:style/Widget.DeviceDefault.Button"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="550dp"
+        android:onClick="Goback"
+        android:text="Goback" />
 
 </RelativeLayout>
