@@ -42,7 +42,7 @@ public class RedActivity extends ActionBarActivity {
         Intent goToIntent = new Intent(this, BlueActivity.class);
 
 
-        final StringRequest loginRequest = new StringRequest(Request.Method.POST, "https://10.0.2.2:8443/api/login",
+        final StringRequest loginRequest = new StringRequest(Request.Method.POST, "https://18.222.122.188:8443/project1-api-example/api/login",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

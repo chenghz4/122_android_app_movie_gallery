@@ -37,7 +37,7 @@ public class ListViewActivity extends Activity {
         Bundle bundle = getIntent().getExtras();
         String title=bundle.getString("message");
 
-        final JsonArrayRequest SearchRequest = new JsonArrayRequest("https://10.0.2.2:8443/api/stars" +
+        final JsonArrayRequest SearchRequest = new JsonArrayRequest("https://18.222.122.188:8443/project1-api-example/api/stars" +
                 "?id="+title+"&year=&director=&star=&page="+page+"&number=20" +
                 "&sort=a.rating%20desc&genres=&letters=",
                 new Response.Listener<JSONArray>() {
@@ -114,7 +114,7 @@ public class ListViewActivity extends Activity {
             page = "" + temp;
         }
 
-        final JsonArrayRequest SearchRequest = new JsonArrayRequest("https://10.0.2.2:8443/api/stars" +
+        final JsonArrayRequest SearchRequest = new JsonArrayRequest("https://18.222.122.188:8443/project1-api-example/api/stars" +
                 "?id="+title+"&year=&director=&star=&page="+page+"&number=20" +
                 "&sort=a.rating%20desc&genres=&letters=",
                 new Response.Listener<JSONArray>() {
@@ -164,7 +164,7 @@ public class ListViewActivity extends Activity {
         int temp=Integer.parseInt(page)-1;
         if(temp==0) temp=1;
         page=""+temp;
-        final JsonArrayRequest SearchRequest = new JsonArrayRequest("https://10.0.2.2:8443/api/stars" +
+        final JsonArrayRequest SearchRequest = new JsonArrayRequest("https://18.222.122.188:8443/project1-api-example/api/stars" +
                 "?id="+title+"&year=&director=&star=&page="+page+"&number=20" +
                 "&sort=a.rating%20desc&genres=&letters=",
                 new Response.Listener<JSONArray>() {
