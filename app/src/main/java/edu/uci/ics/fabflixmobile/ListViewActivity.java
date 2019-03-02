@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class ListViewActivity extends Activity {
 
-    final RequestQueue queue = NetworkManager.sharedManager(this).queue;
+    RequestQueue queue = NetworkManager.sharedManager(this).queue;
     PeopleListViewAdapter adapter;
     String page="1";
     ArrayList<Movie> people = new ArrayList<>();
@@ -45,6 +45,8 @@ public class ListViewActivity extends Activity {
                     public void onResponse(JSONArray response) {
 
                         try {
+                            adapter.clear();
+                            people.clear();
                             temp1=response.length();
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject jsonObject = response.getJSONObject(i);
@@ -78,6 +80,7 @@ public class ListViewActivity extends Activity {
 
         ListView listView = (ListView)findViewById(R.id.list);
         listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -85,6 +88,16 @@ public class ListViewActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Movie movie = people.get(position);
                 goToIntent1.putExtra("id", movie.getId());
+                goToIntent1.putExtra("title", movie.getName());
+
+                goToIntent1.putExtra("year", movie.getBirthYear());
+                goToIntent1.putExtra("director", movie.getDirectname());
+                goToIntent1.putExtra("list_g", movie.getGenreslist());
+                goToIntent1.putExtra("list_s", movie.getStarlist());
+
+
+
+
                 System.out.print(movie.getId());
                 startActivity(goToIntent1);
             }

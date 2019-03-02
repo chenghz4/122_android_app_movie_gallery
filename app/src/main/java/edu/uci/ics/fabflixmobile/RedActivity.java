@@ -33,12 +33,12 @@ public class RedActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_red);
-        Bundle bundle = getIntent().getExtras();
+
     }
 
 
     public void connectToTomcat(View view) {
-        final RequestQueue queue = NetworkManager.sharedManager(this).queue;
+        RequestQueue queue = NetworkManager.sharedManager(this).queue;
         Intent goToIntent = new Intent(this, BlueActivity.class);
 
 
