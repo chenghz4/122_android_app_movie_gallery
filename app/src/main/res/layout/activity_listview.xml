@@ -33,11 +33,11 @@
         android:text="Next" />
     <Button
         style="@android:style/Widget.DeviceDefault.Button"
-        android:layout_width="60dp"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="550dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginTop="500dp"
         android:onClick="Goback"
-        android:text="Goback" />
+        android:text="Go back" />
 
 </RelativeLayout>
